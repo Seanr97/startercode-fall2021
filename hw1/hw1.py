@@ -1,3 +1,4 @@
+
 import time
 import sys
 
@@ -74,4 +75,12 @@ def helper_fact_fut(start, end):
 def future_factor(c, start, end):
     n = 4                                                                                      #same chunk amount as the delayed function                               
     dist = end - start
-    fact_len = dist // n    
+    fact_len = dist // n                               
+    start_place = [start + fact_len * _ for _ in range(n)]
+    end_place = [start + fact_len * (_ + 1) for _ in range(n)]
+    end_place[-1] = end
+    
+    fut_totals = [c.submit(helper_fact_fut, start_place[_], end_place[_]) for _ in range(n)]         #See above comments for reasoning behind c.submit and c.compute use
+    full_total = c.submit(sum, fut_totals)
+    return c.compute(full_total)
+    
