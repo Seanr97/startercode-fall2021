@@ -12,4 +12,3 @@ def fun_factor(x):
             total = total + 1
     time.sleep(0.25)
     return total
-
