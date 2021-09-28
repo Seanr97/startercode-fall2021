@@ -1,10 +1,11 @@
+
 import time
 import sys
 
 from dask.distributed import Client
 from dask import delayed
 
-import hw1sol as hw1
+import hw1 as hw1
 from hwfunctions import fun_factor, fun_inc
 
 NUM_WORKERS = 4
@@ -12,7 +13,6 @@ THREADS_PER_WORKER = 2
 
 def serial(fun, start, end):
     """ Computes the sum of fun applied to the numbers start, start+1, ..., end-1 
-
     fun is going to be either fun_inc or fun_factor
     """
     return sum([fun(x) for x in range(start, end)])
